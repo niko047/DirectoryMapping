@@ -44,4 +44,4 @@ If you want to compile DirMap for a different operating system or architecture, 
 
 ## Contributing
 
-This is a simple project for learning purposes, contributing should not be necessary, if interested in something more elaborate I highly suggest "walkdir".
+This is a simple project for learning purposes, contributing should not be necessary, if interested in something more elaborate I highly suggest [walkdir](https://docs.rs/walkdir/latest/walkdir/).
