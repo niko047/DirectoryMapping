@@ -2,6 +2,24 @@ use std::env;
 use std::fs;
 use std::io::{self, Write, Result};
 use std::path::PathBuf;
+use structopt::StructOpt;
+
+#[derive(Debug, StructOpt)]
+#[structopt(name = "dirmap", about = "A basic directory mapping tool.")]
+struct Opt {
+    /// Set starting path
+    #[structopt(short = "p", long = "path", parse(from_os_str), default_value = ".")]
+    path: PathBuf,
+
+    /// Set output file
+    #[structopt(short = "o", long = "output", parse(from_os_str), default_value = "output.txt")]
+    output: PathBuf,
+
+    /// Set max depth
+    #[structopt(short = "d", long = "depth", default_value = "10")]
+    depth: u8,
+}
+
 
 enum FsEntry {
     File(PathBuf),
@@ -83,28 +101,17 @@ impl MapSnapshot {
     }
 }
 
-fn main() -> Result<()> {
-    let args: Vec<String> = env::args().collect();
+fn main() -> io::Result<()> {
+    let opt = Opt::from_args();
 
-    let dir = if args.len() > 1 {
-        PathBuf::from(&args[1])
-    } else {
-        env::current_dir()?
-    };
-
-    let max_depth = if args.len() > 2 {
-        args[2].parse().unwrap_or(0)
-    } else {
-        10 // default max depth
-    };
-
-    let snapshot = MapSnapshot::new(&dir, max_depth, 0)?;
+    let snapshot = MapSnapshot::new(&opt.path, opt.depth, 0)?;
 
     // Print to a file
-    let mut file = fs::File::create("output.txt")?;
+    let mut file = fs::File::create(opt.output)?;
     snapshot.print(&mut file)?;
 
     Ok(())
 }
+
 
 
