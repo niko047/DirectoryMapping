@@ -8,11 +8,15 @@ Before you can use DirMap, you need to have Rust and its package manager Cargo i
 
 Clone this repository to your local machine:
 
-```git clone https://github.com/yourusername/dirmap.git```
+```
+git clone https://github.com/yourusername/dirmap.git
+```
 
 Navigate to the project's root directory:
 
-```cd dirmap```
+```
+cd dirmap
+```
 
 Then, you can build and install DirMap using Cargo:
 
@@ -28,12 +32,16 @@ The binary will be located in the `target/release/` directory. The `cargo instal
 
 Run DirMap with the `-p`, `-o`, and `-d` options to specify the starting path, output file, and max depth, respectively:
 
-```dirmap -p <starting_path>(=".") -o <output_file>(="output.txt") -d <max_depth>(=10)```
+```
+dirmap -p <starting_path>(=".") -o <output_file>(="output.txt") -d <max_depth>(=10)
+```
 
 
 For example:
 
-```dirmap -p /home/user/documents -o output.txt -d 3```
+```
+dirmap -p /home/user/documents -o output.txt -d 3
+```
 
 
 This will explore the `/home/user/documents` directory down to a maximum depth of 3 levels, and write the resulting map to `output.txt`.
